@@ -7,3 +7,5 @@ The labs already have VS Code installed, but we want to install a user-centric v
 ![](./images/VSCode-LabInstall.png)
 
 ![](./images/VSCode-Install-OpenWithCode.png)
+
+![](./images/GitCredentialManager-GitHub-Authorize.png)
