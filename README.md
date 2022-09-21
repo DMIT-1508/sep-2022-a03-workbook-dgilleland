@@ -1,4 +1,4 @@
-# DMIT-1508 - **Student Workbook** (Sep 2022)
+# DMIT-1508 - **Instructor Workbook** (Sep 2022)
 
 > **Dan Gilleland** - Place your name in this line.
 
