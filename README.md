@@ -1,6 +1,6 @@
 # DMIT-1508 - **Student Workbook** (Sep 2022)
 
-> **STUDENT_NAME** - Place your name in this line.
+> **Dan Gilleland** - Place your name in this line.
 
 ## Inside this repository
 
