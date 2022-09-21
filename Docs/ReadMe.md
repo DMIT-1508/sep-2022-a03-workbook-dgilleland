@@ -14,3 +14,11 @@ In every project you undertake in your software development career, there are th
 
 - When following a tutorial or looking at reference documentation, **read it carefully** (don't skim)
 - Always practice the fundamentals. How well you understand the foundation of your programming language, tools, etc. will determine how far you can go in later complexity.
+
+----
+
+### Image Credits
+
+- Assorted icons created by Freepik - Flaticon
+  - [Chair](https://www.flaticon.com/free-icons/chair)
+
