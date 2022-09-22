@@ -9,7 +9,9 @@ Do you 😍 emoji? Check out this [Emoji Cheat Sheet](https://www.webfx.com/tool
 ## Table of Contents
 
 - [NAIT Labs](./NAIT.md)
-- 
+- Unofficial DMIT-1508 Website
+  - [Design/Normalization](https://dmit-1508.github.io/Design/)
+    - [ESP Demos](https://dmit-1508.github.io/demos/esp/specs/)
 
 ----
 
