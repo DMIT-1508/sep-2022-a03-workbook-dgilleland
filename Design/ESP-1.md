@@ -1,4 +1,4 @@
-# YOUR_NAME
+# Dan Gilleland
 
 **Known Bugs:**
 
@@ -29,6 +29,60 @@ This legend is a guide to reading and interpreting the table listings under 0NF 
 ----
 
 > ***Your solution here***
+
+## Customer Details View
+
+### 0NF
+
+After performing Zero-Normal Form, a single entity was identified: **Customer**
+
+**Customer:** <span class="md"><b class="pk">CustomerNumber</b>, FirstName, LastName, Address, City, Province, PostalCode, HomePhone</span>
+
+### 1NF - 3NF
+
+No changes to the entity in 1NF through 3NF.
+
+### ERD
+
+> Coming soon...
+
+----
+
+## Customer Orders View
+
+### 0NF
+
+After performing Zero-Normal Form, a single entity was identified: **Order**
+
+**Order:** <span class="md"><b class="pk">OrderNumber</b>, CustomerNumber, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class="rg">ItemNumber, Description, Quantity, CurrentPrice, SellingPrice, Amount</b>, Subtotal, GST, Total</span>
+
+### 1NF
+
+After performing First-Normal Form, a new entity was identified: **OrderDetail**
+
+**Order:** <span class="md"><b class="pk">OrderNumber</b>, CustomerNumber, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, Subtotal, GST, Total</span>
+
+**OrderDetail:** <span class="md"><b class="pk"><u class="fk">OrderNumber</u>, ItemNumber</b>, Description, Quantity, CurrentPrice, SellingPrice, Amount</span>
+
+### 2NF
+
+After performing Second-Normal Form, another new entity was identified: **Item**
+
+**OrderDetail:** <span class="md"><b class="pk"><u class="fk">OrderNumber</u>, <u class="fk">ItemNumber</u></b>, Quantity, SellingPrice, Amount</span>
+
+**Item:** <span class="md"><b class="pk">ItemNumber</b>, Description CurrentPrice</span>
+
+### 3NF
+
+After performing Third-Normal Form, another new entity was generated: **Customer**
+
+**Order:** <span class="md"><b class="pk">OrderNumber</b>, <u class="fk">CustomerNumber</u>, Date, Subtotal, GST, Total</span>
+
+**Customer:** <span class="md"><b class="pk">CustomerNumber</b>, FirstName, LastName, Address, City, Province, PostalCode, Phone</span>
+
+### ERD
+
+> Coming Soon - A LucidChart.com ERD
 
 ----
 
