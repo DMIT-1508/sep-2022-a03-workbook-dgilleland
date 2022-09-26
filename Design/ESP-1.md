@@ -44,7 +44,7 @@ No changes to the entity in 1NF through 3NF.
 
 ### ERD
 
-> Coming soon...
+![Customer View](./CustomerView.png)
 
 ----
 
@@ -82,7 +82,7 @@ After performing Third-Normal Form, another new entity was generated: **Customer
 
 ### ERD
 
-> Coming Soon - A LucidChart.com ERD
+![Customer Orders View](./CustomerOrdersView.png)
 
 ----
 
