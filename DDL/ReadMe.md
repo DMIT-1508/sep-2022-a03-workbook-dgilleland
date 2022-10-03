@@ -9,6 +9,8 @@
 - SQL Server Management Studio (SSMS)
   - A software tool to connect to and manage SQL Server instances and their databases.
 
+![Bobby Tables](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+
 ----
 
 ## Notes on Operators and Naming Standards

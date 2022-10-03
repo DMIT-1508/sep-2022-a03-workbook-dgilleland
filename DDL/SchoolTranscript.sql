@@ -11,6 +11,7 @@ IF NOT EXISTS (SELECT name FROM master.sys.databases WHERE name = N'SchoolTransc
 BEGIN
     CREATE DATABASE [SchoolTranscript]
 END
+-- DROP DATABASE [SchoolTranscript]
 GO
 
 -- Switch execution context to the database
@@ -18,3 +19,13 @@ USE [SchoolTranscript] -- remaining SQL statements will run against the SchoolTr
 GO
 
 -- Create Tables...
+-- DROP TABLE Students
+CREATE TABLE Students
+(
+    [StudentID]         int,
+    [GivenName]         varchar(50),
+    [Surname]           varchar(50),
+    [DateOfBirth]       datetime,
+    [Enrolled]          bit
+)
+

@@ -29,6 +29,7 @@ The general topics in this workbook include
 Recommended tools for this course include:
 
 - [SQL Server 2019](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or higher, **Developer Edition**
+  - Choose the Basic install
 - [Git for Windows/macOS/Linux](https://git-scm.com/downloads)
 - [GitHub CLI](https://cli.github.com/)
 - [**Visual Studio Code**](https://code.visualstudio.com) as your *primary editor*
