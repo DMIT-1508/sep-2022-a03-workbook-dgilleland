@@ -29,3 +29,25 @@ CREATE TABLE Students
     [Enrolled]          bit
 )
 
+CREATE TABLE Courses
+(
+    [Number]        varchar(10),
+    [Name]          varchar(50),
+    [Credits]       decimal(3, 1),
+    [Hours]         tinyint,
+    [Active]        bit,
+    [Cost]          money
+)
+
+CREATE TABLE StudentCourses
+(
+    [StudentID]     int,
+    [CourseNumber]  varchar(10),
+    [Year]          int,
+    [Term]          char(3),
+    [FinalMark]     tinyint,
+    [Status]        char(1)
+)
+
+
+
