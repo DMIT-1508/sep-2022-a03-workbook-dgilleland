@@ -11,7 +11,12 @@ IF NOT EXISTS (SELECT name FROM master.sys.databases WHERE name = N'SchoolTransc
 BEGIN
     CREATE DATABASE [SchoolTranscript]
 END
--- DROP DATABASE [SchoolTranscript]
+/*
+USE MASTER
+GO
+DROP DATABASE [SchoolTranscript]
+GO
+*/
 GO
 
 -- Switch execution context to the database
@@ -68,8 +73,17 @@ CREATE TABLE Courses
 
 CREATE TABLE StudentCourses
 (
-    [StudentID]     int             NOT NULL,
-    [CourseNumber]  varchar(10)     NOT NULL,
+    [StudentID]     int
+        CONSTRAINT FK_StudentCourses_Students
+            FOREIGN KEY REFERENCES Students(StudentID)
+        -- A FOREIGN KEY constraint means that the only values
+        -- acceptable for this column must be values that exist
+        -- in the referenced table.
+                                    NOT NULL,
+    [CourseNumber]  varchar(10)
+        CONSTRAINT FK_StudentCourses_Courses -- All constraint names must be unique
+            FOREIGN KEY REFERENCES Courses([Number])
+                                    NOT NULL,
     [Year]          int             NOT NULL,
     [Term]          char(3)         NOT NULL,
     [FinalMark]     tinyint             NULL,
