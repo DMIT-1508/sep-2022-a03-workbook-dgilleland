@@ -1,7 +1,11 @@
-# Databases, Servers, and SSMS
+# DDL - Your Intro to SQL and Creating Databases
+
+See the markdown notes on [`CHECK` constraints](./CHECK-Constraints.md) for the various aspects of operators.
 
 - :film_projector: [How to Use VS Code to Run SQL on a Database](https://youtu.be/C0y35FpiLRA) (15:05)
 - [.NET Interactive with SQL](https://devblogs.microsoft.com/dotnet/net-interactive-with-sql-net-notebooks-in-visual-studio-code/)
+
+## Databases, Servers, and SSMS
 
 - SQL Server
   - Software that runs as a *service* on the computer.
