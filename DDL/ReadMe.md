@@ -1,5 +1,8 @@
 # Databases, Servers, and SSMS
 
+- :film_projector: [How to Use VS Code to Run SQL on a Database](https://youtu.be/C0y35FpiLRA) (15:05)
+- [.NET Interactive with SQL](https://devblogs.microsoft.com/dotnet/net-interactive-with-sql-net-notebooks-in-visual-studio-code/)
+
 - SQL Server
   - Software that runs as a *service* on the computer.
   - Multiple instances of SQL Server can be installed on the same computer.
