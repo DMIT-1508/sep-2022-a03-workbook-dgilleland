@@ -88,7 +88,23 @@ CREATE TABLE Courses
         -- meets the requirements of the constraint.
                                     NOT NULL,
     [Active]        bit             NOT NULL,
-    [Cost]          money           NOT NULL
+    [Cost]          money
+        CONSTRAINT CK_Courses_Cost
+            CHECK (Cost BETWEEN 400.00 AND 1500.00)
+                                    NOT NULL,
+    -- Table-level constraints are used for anything involving more than
+    -- one column, such as Composite Primary Keys or complex CHECK constraints.
+    -- It's a good pattern to put table-level constraints AFTER you have done all the
+    -- column definitions.
+    CONSTRAINT CK_Courses_Credits_Hours
+        CHECK ([Hours] IN (60,90) AND Credits IN (3, 4.5) OR [Hours] = 120 AND Credits = 6)
+        --     \       #1       /
+        --                            \      #2         /
+        --             \          #3           /
+        --                                                   \     #4     /
+        --                                                                     \    #5    /
+        --                                                         \        #6        /
+        --                        \                       #7                  /
 )
 
 CREATE TABLE StudentCourses
