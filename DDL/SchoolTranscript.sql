@@ -53,22 +53,58 @@ CREATE TABLE Students
             --      - The "seed" or starting value for the first row
             --      - The "increment" or value by which we increment
                                     NOT NULL,
-    [GivenName]         varchar(50) NOT NULL,
-    [Surname]           varchar(50) NOT NULL,
+    [GivenName]         varchar(50)
+        CONSTRAINT CK_Students_GivenName
+            CHECK (GivenName LIKE '[A-Z][A-Z]%') -- Matches 'Dan' or 'Danny'
+                                    NOT NULL,
+    [Surname]           varchar(50)
+        CONSTRAINT CK_Students_Surname
+            CHECK (Surname LIKE '__%') -- Not as good as [A-Z][A-Z]%
+                                       -- Silly matches: 42
+                                    NOT NULL,
     [DateOfBirth]       datetime    NOT NULL,
     [Enrolled]          bit         NOT NULL
+        CONSTRAINT DF_Students_Enrolled DEFAULT (1)
+        -- A DEFAULT constraint means that if no data is supplied
+        -- for this column, it will automatically use the default value
 )
 
 CREATE TABLE Courses
 (
     [Number]        varchar(10)
         CONSTRAINT PK_Courses_Number PRIMARY KEY
+        CONSTRAINT CK_Courses_Number
+            CHECK ([Number] LIKE '[A-Z][A-Z][A-Z][A-Z]-[0-9][0-9][0-9][0-9]')
                                     NOT NULL,
     [Name]          varchar(50)     NOT NULL,
-    [Credits]       decimal(3, 1)   NOT NULL,
-    [Hours]         tinyint         NOT NULL,
+    [Credits]       decimal(3, 1)
+        CONSTRAINT CK_Courses_Credits
+            CHECK (Credits IN (3, 4.5, 6))
+                                    NOT NULL,
+    [Hours]         tinyint
+        CONSTRAINT CK_Courses_Hours
+            CHECK ([Hours] = 60 OR [Hours] = 90 OR [Hours] = 120)
+        -- A CHECK constraint will ensure that the value passed in
+        -- meets the requirements of the constraint.
+                                    NOT NULL,
     [Active]        bit             NOT NULL,
-    [Cost]          money           NOT NULL
+    [Cost]          money
+        CONSTRAINT CK_Courses_Cost
+            CHECK (Cost BETWEEN 400.00 AND 1500.00)
+                                    NOT NULL,
+    -- Table-level constraints are used for anything involving more than
+    -- one column, such as Composite Primary Keys or complex CHECK constraints.
+    -- It's a good pattern to put table-level constraints AFTER you have done all the
+    -- column definitions.
+    CONSTRAINT CK_Courses_Credits_Hours
+        CHECK ([Hours] IN (60,90) AND Credits IN (3, 4.5) OR [Hours] = 120 AND Credits = 6)
+        --     \       #1       /
+        --                            \      #2         /
+        --             \          #3           /
+        --                                                   \     #4     /
+        --                                                                     \    #5    /
+        --                                                         \        #6        /
+        --                        \                       #7                  /
 )
 
 CREATE TABLE StudentCourses
@@ -110,4 +146,19 @@ CREATE TABLE StudentCourses
 )
 
 
+/* Editing Table Structure AFTER data exists
+SELECT  StudentID, GivenName, Surname, DateOfBirth, Enrolled
+FROM    Students
+SELECT [Number], [Name], Credits, [Hours], Active, Cost
+FROM   Courses
+SELECT StudentID, CourseNumber, [Year], Term, [Status]
+FROM   StudentCourses
+*/
+-- Modifying Database Table Schemas with ALTER TABLE
+
+-- Consider the fact that there may be data in the table
+-- that you are trying to alter.
+-- If you don't have a default value to apply when
+-- adding your new column, then the new column should
+-- allow NULL values.
 
