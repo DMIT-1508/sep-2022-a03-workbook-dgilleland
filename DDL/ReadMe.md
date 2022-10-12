@@ -11,6 +11,10 @@
 
 ![Bobby Tables](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
 
+See the [Language Ref](../Docs/LanguageRef.md) file and check out the links for things like Dana's notes.
+
+Also, see the notes on the [Check Constraints](./CHECK-Constraints.md) in this folder.
+
 ----
 
 ## Notes on Operators and Naming Standards
