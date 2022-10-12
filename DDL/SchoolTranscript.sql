@@ -146,4 +146,19 @@ CREATE TABLE StudentCourses
 )
 
 
+/* Editing Table Structure AFTER data exists
+SELECT  StudentID, GivenName, Surname, DateOfBirth, Enrolled
+FROM    Students
+SELECT [Number], [Name], Credits, [Hours], Active, Cost
+FROM   Courses
+SELECT StudentID, CourseNumber, [Year], Term, [Status]
+FROM   StudentCourses
+*/
+-- Modifying Database Table Schemas with ALTER TABLE
+
+-- Consider the fact that there may be data in the table
+-- that you are trying to alter.
+-- If you don't have a default value to apply when
+-- adding your new column, then the new column should
+-- allow NULL values.
 
