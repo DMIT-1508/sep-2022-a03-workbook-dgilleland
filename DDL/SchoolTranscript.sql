@@ -224,6 +224,7 @@ SELECT * FROM Courses
 INSERT INTO Courses(Number, Name, Credits, Hours, Active, Cost, SyllabusURL)
 VALUES ('HACK-0001', 'White-Hat Hacking', 4.5, 90, 1, 450.00, 'gopher://hack.dev')
 */ 
+GO
 
 -- B) Add a CHECK constraint to the SyllabusURL that will ensure the value matches a website URL (HTTPS://).
 ALTER TABLE Courses
@@ -274,6 +275,10 @@ CREATE NONCLUSTERED INDEX IX_StudentCourses_CourseNumber
 /* INDEX Statements - Practice */
 
 -- A) Add an index for the Name column in the Courses table.
+CREATE NONCLUSTERED INDEX IX_Courses_Name
+    ON Courses(Name) -- Name is a column name
 -- B) Add an index for the Year column in the StudentCourses table.
+CREATE NONCLUSTERED INDEX IX_StudentCourses_Year
+    ON StudentCourses([Year])
 
 GO -- End the batch
