@@ -23,12 +23,9 @@ GO
 USE [SchoolTranscript] -- remaining SQL statements will run against the SchoolTranscript database
 GO
 
-IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'StudentCourses')
-    DROP TABLE StudentCourses
-IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Courses')
-    DROP TABLE Courses
-IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Students')
-    DROP TABLE Students
+DROP TABLE IF EXISTS StudentCourses
+DROP TABLE IF EXISTS Courses
+DROP TABLE IF EXISTS Students
 
 GO
 
@@ -146,4 +143,142 @@ CREATE TABLE StudentCourses
 )
 
 
+/* Editing Table Structure AFTER data exists
+SELECT  StudentID, GivenName, Surname, DateOfBirth, Enrolled
+FROM    Students
+SELECT [Number], [Name], Credits, [Hours], Active, Cost
+FROM   Courses
+SELECT StudentID, CourseNumber, [Year], Term, [Status]
+FROM   StudentCourses
+*/
+-- Modifying Database Table Schemas with ALTER TABLE
 
+-- Consider the fact that there may be data in the table
+-- that you are trying to alter.
+-- If you don't have a default value to apply when
+-- adding your new column, then the new column should
+-- allow NULL values.
+
+-- Here is an example where we add an extra column to the
+-- Students table for the student's home email.
+ALTER TABLE Students
+   ADD  Email   varchar(30)     NULL
+
+/*
+-- Here's a quck'n'dirty way to see all the column in a table
+SELECT * FROM Students
+*/
+
+-- New requirement: We need a column called "Paid" on
+-- the StudentCourses table. This has to be a Required
+-- column (NOT NULL).
+-- We need a DEFAULT value for existing rows of data.
+ALTER TABLE StudentCourses
+    ADD     Paid    bit     NOT NULL
+        CONSTRAINT DF_StudentCourses_Paid DEFAULT (0)
+
+-- SELECT * FROM StudentCourses
+-- sp_help StudentCourses
+
+-- Practice: Add a column "OverDue" to the 
+-- StudentCourses table as a bit. (Optional)
+ALTER TABLE StudentCourses
+    ADD     OverDue bit     NULL
+
+-- New change request: Have a default for the
+-- "OverDue" column: 0
+ALTER TABLE StudentCourses
+    ADD CONSTRAINT DF_StudentCourses_OverDue
+        DEFAULT (0) FOR OverDue
+-- Also notice above that I have a slightly different
+-- syntax for the default constraint:
+--  DEFAULT (value) FOR ColumnName
+-- Lastly, not that the new constraint will only apply for
+-- new rows of data for my DEFAULT constraint.
+/*
+-- Testing with inserting some data
+INSERT INTO StudentCourses(StudentID, CourseNumber, [Year], Term, [Status])
+VALUES (2015, 'DMIT-1508', 2020, 'SEP', 'E')
+
+SELECT * FROM StudentCourses
+SELECT * FROM Students
+*/
+GO -- Run all the above ALTER tables in their own "batch"
+
+-- Here's another change request: The Students.Email column is too short.
+-- Alter the table to allow up to 90 characters in length
+ALTER TABLE Students
+    ALTER COLUMN   Email       varchar(90)     NULL
+-- sp_help Students
+GO -- Another "batch" for the latest change request
+
+
+/* ALTER TABLE Statements - PRACTICE */
+
+-- A) Add column to the Courses table called "SyllabusURL" that is a variable-length
+--    string of up to 70 characters. Determine for yourself if it should be NULL or NOT NULL.
+ALTER TABLE Courses
+    ADD SyllabusURL varchar(70) NULL
+/* After you add the column, here's some test data to insert into the database
+SELECT * FROM Courses
+INSERT INTO Courses(Number, Name, Credits, Hours, Active, Cost, SyllabusURL)
+VALUES ('HACK-0001', 'White-Hat Hacking', 4.5, 90, 1, 450.00, 'gopher://hack.dev')
+*/ 
+GO
+
+-- B) Add a CHECK constraint to the SyllabusURL that will ensure the value matches a website URL (HTTPS://).
+ALTER TABLE Courses
+        WITH NOCHECK
+    --  WITH NOCHECK means it will not apply the CHECK
+    --               to the existing data in the table
+    ADD CONSTRAINT CK_Courses_SyllabusURL
+        CHECK (SyllabusURL LIKE 'https://%')
+        --      Match for       'https://DMIT-1508.github.io'
+/*
+INSERT INTO Courses(Number, Name, Credits, Hours, Active, Cost, SyllabusURL)
+VALUES ('HACK-1705', 'Gray-Hat Hacking', 4.5, 90, 1, 450.00, 'https://hack.dev')
+INSERT INTO Courses(Number, Name, Credits, Hours, Active, Cost, SyllabusURL)
+VALUES ('SHIP-1705', 'Warp Drive Engineering', 4.5, 90, 1, 450.00, 'https://ST.Earth.UFP')
+*/
+
+-- C) One of the functions that we can use in SQL is the GETDATE() function that will 
+--    return the current datetime. Use this GETDATE() function as the default value
+--    for new column in Students called "EnrolledDate".
+ALTER TABLE Students
+    ADD EnrolledDate    datetime    NOT NULL
+        CONSTRAINT DF_Students_EnrolledDate
+            DEFAULT (GETDATE())
+
+GO -- end the batch of statements that alter the database
+
+/* CREATE INDEX */
+
+-- Indexes improve the performance of the database when retrieving information.
+-- They do this by providing an additional "lookup" table that is sorted by the indexed column(s).
+
+-- When we create a table with a PRIMARY KEY, then that/those column(s) are given "clustered" indexes.
+-- In other words, the data in the database will (by default) be "sorted by" the Primary Key column(s).
+
+-- We can add additional columns as indexes for quick lookup, but those have to be as "Non-Clustered" indexes.
+
+CREATE NONCLUSTERED INDEX IX_Students_Surname
+    ON Students(Surname) -- lookup by last name
+
+-- What should we index in our tables?
+--   - Foreign Key Columns
+--   - Anything else that will frequently be used as something we either "lookup by" or "sort by"
+CREATE NONCLUSTERED INDEX IX_StudentCourses_StudentID
+    ON StudentCourses(StudentID)
+CREATE NONCLUSTERED INDEX IX_StudentCourses_CourseNumber
+    ON StudentCourses(CourseNumber)
+
+/* INDEX Statements - Practice */
+
+-- A) Add an index for the Name column in the Courses table.
+CREATE NONCLUSTERED INDEX IX_Courses_Name
+    ON Courses(Name) -- Name is a column name
+-- B) Add an index for the Year column in the StudentCourses table.
+CREATE NONCLUSTERED INDEX IX_StudentCourses_Year
+    ON StudentCourses([Year])
+
+GO -- End the batch
