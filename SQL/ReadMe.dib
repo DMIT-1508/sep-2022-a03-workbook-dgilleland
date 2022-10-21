@@ -15,3 +15,12 @@ Once you have created the database from the `A0X-School` script, run the followi
 #!csharp
 
 #r "nuget:Microsoft.DotNet.Interactive.SqlServer,*-*"
+
+#!csharp
+
+#!connect mssql --kernel-name mydatabase "Server=.\SQLExpress; Initial Catalog=A0X-School; Persist Security Info=False; Integrated Security=true"
+
+#!sql
+
+#!sql-mydatabase
+SELECT DB_NAME()
