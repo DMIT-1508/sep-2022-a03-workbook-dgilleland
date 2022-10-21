@@ -1,0 +1,17 @@
+#!markdown
+
+# SQL Queries
+
+In this notebook, you will explore how to perform queries on an SQL Server database.
+
+#!markdown
+
+## Setup
+
+To follow along with running the code samples in this notebook, you will need to edit and then run the [A0X-School.sql](./A0X-School.sql) script. In that script, perform a search-and-replace (<kbd>Ctrl</kbd> + <kbd>h</kbd>) where you will replace the `A0X` in the name `A0X-School` with your actual section number.
+
+Once you have created the database from the `A0X-School` script, run the following block to install the required packages for this notebook.
+
+#!csharp
+
+#r "nuget:Microsoft.DotNet.Interactive.SqlServer,*-*"
