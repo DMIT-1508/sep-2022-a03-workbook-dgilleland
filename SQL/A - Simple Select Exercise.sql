@@ -1,6 +1,6 @@
 --SIMPLE SELECT EXERCISE 1
 
-USE [A0X-School]
+USE [A03-School]
 GO
 
 /* SELECT Statement in SQL
@@ -18,7 +18,7 @@ ORDER BY clause - Sort our final results
 SELECT  'Dan', 'Gilleland'
 
 -- Simple Select with expressions
-SELECT  'Dan' + ' ' + 'Gilleland', 18 * 52, '5' + '10'
+SELECT  'Dan' + ' ' + 'Gilleland', 22 * 52, '5' + '10'
 --        textual information      numbers    textual
 
 -- Specify a column name with some hard-code/calculated values
@@ -48,6 +48,9 @@ FROM    Club
   -- Pro-Tip: If you write the FROM clause before specifying the columns,
   --            you will get Intellisense help on the column names
   -- Pro-Tip: Press [ctrl] + [shift] + r to "refresh" intellisense
+
+-- When running your SQL code from within VS Code, you can use the following shortcuts
+  -- [ctrl] + [shift] + [e] will run the SQL code
 
 -- 2.   Select the FirstNames and LastNames of all the students
 SELECT  FirstName, LastName
@@ -106,7 +109,7 @@ SELECT  PositionID, PositionDescription
 FROM    Position
 
 --6.    Select the Course Names whose course hours are less than 96
-SELECT  C.CourseName
+SELECT  C.CourseName, C.CourseHours
 FROM    Course AS C -- I can have an alias to the table name
 WHERE   C.CourseHours < 96
 
@@ -119,6 +122,11 @@ SELECT  Staff.LastName, Staff.FirstName, Staff.DateHired
 FROM    Staff
 WHERE   Staff.DateReleased IS NOT NULL
 -- NOTE: You can't mix the use of a table alias with the full name of the table
+
+-- Ad-Hoc.  List the course id and semester of the student registrations and sort them by course id within semester
+SELECT  R.CourseId, R.Semester
+FROM    Registration AS R
+ORDER BY R.Semester, R.CourseId
 
 -- 7.   Select the studentID's, CourseID and mark where the Mark is between 70 and 80
 SELECT  StudentID, CourseId, Mark
@@ -137,6 +145,8 @@ SELECT  StudentID
 FROM    Registration
 WHERE   WithdrawYN = 'Y'
 
+--      binary operators and  order of operation in C#
+--      see https://programming-0101.github.io/TheBook/Topic/E/Examples/ResolveExpressions.html
 --8.    Select the studentID's, CourseID and mark where the Mark is
 --      between 70 and 80 and the courseID is DMIT223 or DMIT168
 SELECT  R.StudentID, R.CourseId, R.Mark
