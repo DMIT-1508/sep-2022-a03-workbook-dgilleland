@@ -71,7 +71,7 @@ GROUP BY City
 
 -- 6. Which cities have 2 or more students from them? (HINT, remember that fields that we use in the where or having do not need to be selected.....)
 SELECT  City
---        , COUNT(StudentID) AS 'Student Count'
+        , COUNT(StudentID) AS 'Student Count'
 FROM    Student
 GROUP BY City
 HAVING COUNT(StudentID) >= 2
