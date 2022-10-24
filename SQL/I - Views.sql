@@ -1,5 +1,5 @@
 --View Exercise
-USE [A0X-School]
+USE [A03-School]
 GO
 
 -- Database tables are all about storing information.

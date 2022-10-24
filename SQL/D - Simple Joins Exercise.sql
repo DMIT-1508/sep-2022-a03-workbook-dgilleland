@@ -1,5 +1,5 @@
 --Joins Exercise 1
-USE [A0X-School]
+USE [A03-School]
 GO
 
 --1.	Select Student full names and the course ID's they are registered in.
