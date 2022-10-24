@@ -2,9 +2,11 @@
 -- This set of exercises demonstrates performing simple Aggregate functions
 -- to get results such as SUM(), AVG(), COUNT() 
 -- All aggregates are done using built-in functions in the database
-Use [A0X-School]
+Use [A03-School]
 GO
 
+SELECT DB_NAME()
+GO
 --1.	Select the average Mark from all the Marks in the registration table
 -- SELECT * FROM Registration - view raw data
 SELECT  AVG(Mark) AS 'Average Mark'
