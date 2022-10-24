@@ -45,13 +45,13 @@ SELECT  COUNT(DateReleased) AS 'Retired Staff'
 FROM    Staff
 
 --4.	Select how many students have taken (have a grade for) DMIT152
-SELECT  COUNT(Mark) AS 'Student Count for DMIT152'
+SELECT  COUNT(Mark) AS 'Student Marks for DMIT152'
 FROM    Registration
 WHERE   CourseId = 'DMIT152'
 
 --4.b   Select how many students are or have been in DMIT152
 --      SELECT * FROM Registration WHERE CourseId = 'DMIT152'
-SELECT  COUNT(StudentID)
+SELECT  COUNT(StudentID) 'Student Count for DMIT152'
 FROM    Registration
 WHERE   CourseId = 'DMIT152'
     -- BTW, what course is 'DMIT152'???
