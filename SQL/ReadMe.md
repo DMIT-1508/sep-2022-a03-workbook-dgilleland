@@ -1,6 +1,6 @@
 # SQL Queries and Views
 
-The samples and practice questions in this folder walk through the use of SQL Queries and Views and are based on the database A0X-School. You can create the database with data by running the [install script](./A0X-School.sql). The complete ERD for this database is found at the [end of this document](#erd-for-A0X-School).
+The samples and practice questions in this folder walk through the use of SQL Queries and Views and are based on the database A03-School. You can create the database with data by running the [install script](./A03-School.sql). The complete ERD for this database is found at the [end of this document](#erd-for-A03-School).
 
 > A good reference for the grammar of [SQL Queries](https://dmarshnait.github.io/dmit1508/queries) and [Views](https://dmarshnait.github.io/dmit1508/views) can be found on [Dana Marsh's site](https://dmarshnait.github.io/dmit1508/).
 
@@ -129,6 +129,6 @@ Review these articles at SQLShack
 
 ----
 
-## ERD for A0X-School
+## ERD for A03-School
 
 ![ERD](./IQSchool-ERD.png)

@@ -1,5 +1,5 @@
 -- Delete Examples
-USE [A0X-School]
+USE [A03-School]
 GO -- Execute the code up to this point as a single batch
 
 -- Delete examples

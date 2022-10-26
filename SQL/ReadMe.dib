@@ -8,9 +8,9 @@ In this notebook, you will explore how to perform queries on an SQL Server datab
 
 ## Setup
 
-To follow along with running the code samples in this notebook, you will need to edit and then run the [A0X-School.sql](./A0X-School.sql) script. In that script, perform a search-and-replace (<kbd>Ctrl</kbd> + <kbd>h</kbd>) where you will replace the `A0X` in the name `A0X-School` with your actual section number.
+To follow along with running the code samples in this notebook, you will need to edit and then run the [A03-School.sql](./A03-School.sql) script. In that script, perform a search-and-replace (<kbd>Ctrl</kbd> + <kbd>h</kbd>) where you will replace the `A03` in the name `A03-School` with your actual section number.
 
-Once you have created the database from the `A0X-School` script, run the following block to install the required packages for this notebook.
+Once you have created the database from the `A03-School` script, run the following block to install the required packages for this notebook.
 
 #!csharp
 
@@ -18,7 +18,7 @@ Once you have created the database from the `A0X-School` script, run the followi
 
 #!csharp
 
-#!connect mssql --kernel-name mydatabase "Server=.\SQLExpress; Initial Catalog=A0X-School; Persist Security Info=False; Integrated Security=true"
+#!connect mssql --kernel-name mydatabase "Server=.\SQLExpress; Initial Catalog=A03-School; Persist Security Info=False; Integrated Security=true"
 
 #!sql
 

@@ -98,6 +98,9 @@ Millisecond     ms               0             999
 	SELECT GETDATE() AS 'Database Server- Current Date/Time'
 	-- DATENAME - See https://msdn.microsoft.com/en-CA/library/ms174395.aspx for DateParts
 	SELECT DATENAME(MONTH, GETDATE()) AS 'Database Server- Current Month'
+  -- Abbreviate the month name to 3 characters.
+  -- TODO: Student Answer Here
+	SELECT LEFT(DATENAME(MONTH, GETDATE()), 3) AS 'Database Server- Current Month'
 	-- DATEPART - Similar to above
 	SELECT DATEPART(WEEKDAY, GETDATE()) AS 'Day of the week',
 	       DATENAME(WEEKDAY, GETDATE()) AS 'Day of the week'
@@ -157,9 +160,14 @@ WHERE   Mark IS NOT NULL
 -- TODO: Student Answer Here...
 
 
--- 7. Select the characters in the position description from characters 8 to 13 for PositionID 5
+-- 7. Select the characters in the position description from characters 8 to 12
+--    (five characters worth) for PositionID 5
 -- TODO: Student Answer Here...
-
+-- Exploring...
+SELECT * FROM Position
+SELECT  SUBSTRING(PositionDescription, 8, 5)
+FROM    [Position]
+WHERE   PositionID = 5
 
 -- 8. Select all the Student First Names as upper case.
 -- TODO: Student Answer Here...
@@ -169,3 +177,6 @@ WHERE   Mark IS NOT NULL
 -- TODO: Student Answer Here...
 
 
+-- 10. Select the staff names and the name of the month they were hired
+--     and order the results by the month number.
+-- TODO: Student Answer Here...

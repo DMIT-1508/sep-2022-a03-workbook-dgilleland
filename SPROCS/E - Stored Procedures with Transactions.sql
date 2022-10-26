@@ -1,7 +1,7 @@
 --  Stored Procedures (Sprocs)
 -- Demonstrate using Transactions in a Stored Procedure
 
-USE [A0X-School]
+USE [A03-School]
 GO
 
 /*
