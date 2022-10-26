@@ -83,6 +83,9 @@ This document introduces the using the `GROUP BY` clause with aggregate function
 
 ## [`D - Simple Joins Exercise.sql`](./D%20-%20Simple%20Joins%20Exercise.sql)
 
+Review the articles [SQL Convert Date functions and formats](https://www.sqlshack.com/sql-convert-date-functions-and-formats/) at SQLShack.
+
+
 ----
 
 ## [`E - String and Date functions.sql`](./E%20-%20String%20and%20Date%20functions.sql)
@@ -91,9 +94,20 @@ This document introduces the using the `GROUP BY` clause with aggregate function
 
 ## [`F - Inner Joins with Aggregates.sql`](./F%20-%20Inner%20Joins%20with%20Aggregates.sql)
 
+Review these articles at SQLShack
+
+- [Learn SQL: INNER JOIN vs LEFT JOIN](https://www.sqlshack.com/learn-sql-inner-join-vs-left-join/)
+- [A step-by-step walkthrough of SQL Inner Join](https://www.sqlshack.com/a-step-by-step-walkthrough-of-sql-inner-join/)
+
 ----
 
 ## [`G - Outer Joins.sql`](./G%20-%20Outer%20Joins.sql)
+
+Review these articles at SQLShack
+
+- [SQL OUTER JOIN overview and examples](https://www.sqlshack.com/sql-outer-join-overview-and-examples/).
+- [SQL multiple joins for beginners with examples](https://www.sqlshack.com/sql-multiple-joins-for-beginners-with-examples/)
+
 
 ----
 
