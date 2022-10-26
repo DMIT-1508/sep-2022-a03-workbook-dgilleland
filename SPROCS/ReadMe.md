@@ -10,6 +10,13 @@ The comments below on the supplied script files highlight notable points on the 
 
 ## Overview
 
+
+----
+
+## Additional Resources
+
+- [SQL Variables: Basics and usage](https://www.sqlshack.com/sql-variables-basics-and-usage/)
+
 ----
 
 ## ERD for A0X-School
