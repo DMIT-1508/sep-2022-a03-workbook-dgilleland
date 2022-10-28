@@ -1,4 +1,4 @@
---Outer Joins Exercise
+-- G - Outer Joins Exercise
 USE [A03-School]
 GO
 
@@ -68,4 +68,3 @@ GROUP BY FirstName, LastName
 
 --10. Display the names of all students who have not made a payment.
 -- TODO: Student Answer Here...
-
