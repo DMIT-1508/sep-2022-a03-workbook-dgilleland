@@ -1,5 +1,7 @@
 /* Answers to Practice SQL Query Questions
  *************************************************/
+USE [A03-School]
+GO
 
 /* ===============================
    |  A - Simple Select          |
@@ -218,19 +220,19 @@ ORDER BY R.CourseId
   -- TODO: Student Answer Here
 	SELECT LEFT(DATENAME(MONTH, GETDATE()), 3) AS 'Database Server- Current Month'
 
-
+   
 -- 6. select last three characters of all the course ids
 -- TODO: Student Answer Here...
 
 
--- 7. Select the characters in the position description from characters 8 to 13 for PositionID 5
+-- 7. Select the characters in the position description from characters 8 to 12
+--    (five characters worth) for PositionID 5
 -- TODO: Student Answer Here...
 -- Exploring...
 -- SELECT * FROM Position
 SELECT  SUBSTRING(PositionDescription, 8, 5)
 FROM    [Position]
 WHERE   PositionID = 5
-
 
 -- 8. Select all the Student First Names as upper case.
 -- TODO: Student Answer Here...
@@ -239,6 +241,10 @@ WHERE   PositionID = 5
 -- 9. Select the First Names of students whose first names are 3 characters long.
 -- TODO: Student Answer Here...
 
+
+-- 10. Select the staff names and the name of the month they were hired
+--     and order the results by the month number.
+-- TODO: Student Answer Here...
 
 
 /* ===============================
@@ -297,7 +303,28 @@ GROUP BY ClubName
 
 --6. How many times has each course been offered? Display the course ID and course name along with the number of times it has been offered.
 -- TODO: Student Answer Here...
-SELECT  C.CourseId, C.CourseName, COUNT(R.CourseId) AS 'Offerings'
+-- A course has been offered whenever a course has a different Semester associated with it.
+-- Let's explore the Registration table, looking at Course IDs and Semesters.
+SELECT  R.CourseId, R.Semester
+FROM    Registration AS R
+ORDER BY R.CourseId
+-- Let's add a DISTINCT to omit the duplicates
+SELECT  DISTINCT R.CourseId, R.Semester
+FROM    Registration AS R
+ORDER BY R.CourseId
+
+-- When we run a left outer join, counting the semesters, we get count values that seem inflated. That's because we are counting each occurrance of the Semester value, even if there are duplicates.
+
+SELECT  C.CourseId, C.CourseName,
+        COUNT(R.Semester) AS 'Offerings'
+FROM    Course AS C
+    LEFT OUTER JOIN Registration AS R
+        ON C.CourseId = R.CourseId
+GROUP BY C.CourseId, C.CourseName
+
+-- The solution is to include a DISTINCT in the COUNT() function
+SELECT  C.CourseId, C.CourseName,
+        COUNT(DISTINCT R.Semester) AS 'Offerings'
 FROM    Course AS C
     LEFT OUTER JOIN Registration AS R
         ON C.CourseId = R.CourseId
@@ -305,22 +332,31 @@ GROUP BY C.CourseId, C.CourseName
 
 --7. How many courses have each of the staff taught? Display the full name and the count.
 -- TODO: Student Answer Here...
+-- The following might seem like it would work, but we're actually
+-- counting each student in each course taught by staff members.
 SELECT  FirstName + ' ' + LastName,
         COUNT(R.CourseId) AS 'CourseCount'
 FROM    Staff AS S
     LEFT OUTER JOIN Registration AS R ON S.StaffID = R.StaffID
 GROUP BY FirstName, LastName
 
---   Another way of interpreting the question is to think of the number of "kinds" of courses the staff has taught
+-- A better way of interpreting the question is to think of the number of "kinds" of courses the staff has taught
+-- Adding in the DISTINCT keyword on the COUNT aggregate gives us a better result.
 SELECT  FirstName + ' ' + LastName,
        COUNT(DISTINCT CourseId) AS 'CourseCount'
 FROM    Staff AS S
    LEFT OUTER JOIN Registration AS R ON S.StaffID = R.StaffID
 GROUP BY FirstName, LastName
 
+-- We can see a quick check using the following and doing a manual count of the courses taught by staff
+SELECT  DISTINCT StaffID, CourseId
+FROM    Registration
+ORDER BY StaffID
+
 --8. How many second-year courses have the staff taught? Include all the staff and their job position.
 --   A second-year course is one where the number portion of the course id starts with a '2'.
 -- TODO: Student Answer Here...
+-- Again, it might first seem to be good enough to count the Course IDs, as in the following example
 SELECT  PositionDescription,
         FirstName + ' ' + LastName AS 'StaffName',
         COUNT(CourseId) AS 'CourseCount'
@@ -333,7 +369,7 @@ WHERE   CourseId LIKE '____2%' -- An underscore means a single character
    OR   CourseId IS NULL -- Now I will get staff that haven't taught a course
 GROUP BY PositionDescription, FirstName, LastName
 
---   Another way of interpreting the question is to think of the number of "kinds" of courses the staff has taught
+-- But the DISTINCT keyword in the COUNT() function gives the correct answer.
 SELECT  PositionDescription,
         FirstName + ' ' + LastName AS 'StaffName',
         COUNT(DISTINCT CourseId) AS 'CourseCount'
@@ -511,4 +547,3 @@ HAVING AVG(Mark) >= ALL --  A number can't be 'GREATER THAN or EQUAL TO' a NULL 
 /* ===============================
    |  J - Unions                 |
    ------------------------------- */
-
