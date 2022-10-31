@@ -539,7 +539,7 @@ HAVING AVG(Mark) >= ALL --  A number can't be 'GREATER THAN or EQUAL TO' a NULL 
 --6.  Select the same information using the student grades view for studentID 199912010.
 -- TODO: Student Answer here
 
---7.  Retrieve the course id for the student grades view from the database.
+--7.  Using the StudentGrades view, retrieve the average grades for each course, showing the course id and average.
 -- TODO: Student Answer here
 
 
