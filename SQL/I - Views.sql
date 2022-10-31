@@ -10,10 +10,7 @@ GO
 -- Rather, the View "extracts" data from the tables by using a SELECT statement under the hood.
 
 --1.  Create a view of staff full names called StaffList.
-IF OBJECT_ID('StaffList', 'V') IS NOT NULL
-    DROP VIEW StaffList
-GO
-CREATE VIEW StaffList
+CREATE OR ALTER VIEW StaffList
 AS
     SELECT  FirstName + ' ' + LastName AS 'StaffFullName'
     FROM    Staff
@@ -26,10 +23,7 @@ FROM    StaffList
 -- SP_HELP StaffList        -- Gets schema info on the View
 GO
 --2.  Create a view of staff ID's, full names, positionID's and datehired called StaffConfidential.
-IF OBJECT_ID('StaffConfidential', 'V') IS NOT NULL
-    DROP VIEW StaffConfidential
-GO
-CREATE VIEW StaffConfidential
+CREATE OR ALTER VIEW StaffConfidential
 AS
     SELECT  StaffID,
             FirstName + ' ' + LastName AS 'FullName',
@@ -57,10 +51,7 @@ FROM    StaffConfidential
 GO
 
 --3.  Create a view called StaffExperience that returns the name of the staff members that have taught courses and the names of the courses they have taught. Sort the results by staff last name then first name, then course name.
-IF OBJECT_ID('StaffExperienceRaw', 'V') IS NOT NULL
-    DROP VIEW StaffExperienceRaw
-GO
-CREATE VIEW StaffExperienceRaw
+CREATE OR ALTER VIEW StaffExperienceRaw
 AS
     -- 
     SELECT  FirstName + ' ' + LastName as 'StaffName',
@@ -74,10 +65,8 @@ AS
         -- "The OFFSET is the number of rows to skip before including them in the result."
         OFFSET 0 ROWS
 GO
-IF OBJECT_ID('StaffExperience', 'V') IS NOT NULL
-    DROP VIEW StaffExperience
-GO
-CREATE VIEW StaffExperience
+-- This next view will query information from the previous view
+CREATE OR ALTER VIEW StaffExperience
 AS
     SELECT  StaffName, CourseName
     FROM    StaffExperienceRaw
@@ -101,6 +90,5 @@ SELECT StaffName, CourseName FROM StaffExperience
 --6.  Select the same information using the student grades view for studentID 199912010.
 -- TODO: Student Answer here
 
---7.  Retrieve the course id for the student grades view from the database.
+--7.  Using the StudentGrades view, retrieve the average grades for each course, showing the course id and average.
 -- TODO: Student Answer here
-
