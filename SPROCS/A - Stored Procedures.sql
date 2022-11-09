@@ -121,7 +121,7 @@ RETURN
 GO
 
 --3.B. Your instructor is back, and recommends that the previous stored procedure use a parameter for the semester, making it more "re-usable"
-ALTER PROCEDURE HonorCoursesOneTerm
+CREATE OR ALTER PROCEDURE HonorCoursesOneTerm
     @Semester   char(5) -- @ preceeds the name of the parameter
 AS
     SELECT C.CourseName
@@ -137,10 +137,8 @@ EXEC HonorCoursesOneTerm '2004S'
 EXEC HonorCoursesOneTerm '2004J'
 
 --4.  Create a stored procedure called CourseCalendar that lists the course ID, name, and cost of all available courses.
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'CourseCalendar')
-    DROP PROCEDURE CourseCalendar
 GO
-CREATE PROCEDURE CourseCalendar
+CREATE OR ALTER PROCEDURE CourseCalendar
     -- Parameters here
 AS
     -- Body of procedure here
@@ -153,10 +151,8 @@ GO
 EXEC CourseCalendar
 
 --4.B. Create a stored procedure called "NotInCourse" that lists the full names of the students that are not in a particular course. The stored procedure should expect the course number as a parameter. e.g.: DMIT221.
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'NotInCourse')
-    DROP PROCEDURE NotInCourse
 GO
-CREATE PROCEDURE NotInCourse
+CREATE OR ALTER PROCEDURE NotInCourse
     -- Parameters here
     @CourseNumber   char(7)
 AS
@@ -172,10 +168,8 @@ EXEC NotInCourse 'DMIT221'
 
 
 --5. Create a stored procedure called "LowNumbers" to select the course name of the course(s) that have had the lowest number of students in it.
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'LowNumbers')
-    DROP PROCEDURE LowNumbers
 GO
-CREATE PROCEDURE LowNumbers
+CREATE OR ALTER PROCEDURE LowNumbers
     -- Parameters here
 AS
     -- Body of procedure here

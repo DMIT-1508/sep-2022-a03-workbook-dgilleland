@@ -12,10 +12,8 @@ USE [A03-School]
 GO
 
 /* ********* SPROC Template ************
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'SprocName')
-    DROP PROCEDURE SprocName
 GO
-CREATE PROCEDURE SprocName
+CREATE OR ALTER PROCEDURE SprocName
     -- Parameters here
 AS
     -- Body of procedure here
@@ -25,11 +23,9 @@ GO
 
 
 -- 1. Create a stored procedure called AddClub that will add a new club to the database. (No validation is required).
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'AddClub')
-    DROP PROCEDURE AddClub
 GO
 -- sp_help Club -- Running the sp_help stored procedure will give you information about a table, sproc, etc.
-CREATE PROCEDURE AddClub
+CREATE OR ALTER PROCEDURE AddClub
     -- Parameters here
     @ClubId     varchar(10),
     @ClubName   varchar(50)
@@ -51,7 +47,7 @@ GO
 -- put in our own validation.
 
 -- 1.b. Modify the AddClub procedure to ensure that the club name and id are actually supplied. Use the RAISERROR() function to report that this data is required.
-ALTER PROCEDURE AddClub
+CREATE OR ALTER PROCEDURE AddClub
     -- Parameters here
     @ClubId     varchar(10),
     @ClubName   varchar(50)
@@ -72,10 +68,8 @@ GO
 
 -- 2. Make a stored procedure that will find a club based on the first two or more characters of the club's ID. Call the procedure "FindStudentClubs"
 -- The following stored procedure does the query, but without validation
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'FindStudentClubs')
-    DROP PROCEDURE FindStudentClubs
 GO
-CREATE PROCEDURE FindStudentClubs
+CREATE OR ALTER PROCEDURE FindStudentClubs
     @PartialID      varchar(10)
 AS
     -- Body of procedure here
@@ -89,7 +83,7 @@ EXEC FindStudentClubs NULL  -- What do you predict the result will be?
 -- If you add NULL + '%'  (null added to any string) the result is NULL
 EXEC FindStudentClubs ''    -- What do you predict the result will be?
 GO
-ALTER PROCEDURE FindStudentClubs
+CREATE OR ALTER PROCEDURE FindStudentClubs
     @PartialID      varchar(10)
 AS
     -- Body of procedure here
@@ -107,7 +101,7 @@ EXEC FindStudentClubs ''    -- What do you predict the result will be?
 GO
 -- The above change did not stop the select.
 -- To fix it, we need the ELSE side of the IF validation
-ALTER PROCEDURE FindStudentClubs -- Third time's the charm ;)
+CREATE OR ALTER PROCEDURE FindStudentClubs -- Third time's the charm ;)
     @PartialID      varchar(10)
 AS
     -- Body of procedure here
@@ -131,10 +125,8 @@ EXEC FindStudentClubs 'NA'  -- Should give good results with no errors.
 -- 3. Create a stored procedure that will change the mailing address for a student. Call it ChangeMailingAddress.
 --    Make sure all the parameter values are supplied before running the UPDATE (ie: no NULLs).
 -- sp_help Student
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'ChangeMailingAddress')
-    DROP PROCEDURE ChangeMailingAddress
 GO
-CREATE PROCEDURE ChangeMailingAddress
+CREATE OR ALTER PROCEDURE ChangeMailingAddress
     -- Parameters here
     @StudentId  int, -- This is being used for the WHERE clause of my UPDATE
     -- The remaining parameters are for the data to be SET in the table.
@@ -161,10 +153,8 @@ AS
 RETURN
 
 -- 4. Create a stored procedure that allows us to make corrections to a student's name. It should take in the student ID and the corrected name (first/last) of the student. Call the stored procedure CorrectStudentName. Validate that the student exists before attempting to change the name.
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'CorrectStudentName')
-    DROP PROCEDURE CorrectStudentName
 GO
-CREATE PROCEDURE CorrectStudentName
+CREATE OR ALTER PROCEDURE CorrectStudentName
     @StudentId      int,
     @FirstName      varchar(25),
     @LastName       varchar(35)
