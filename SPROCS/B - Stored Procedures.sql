@@ -3,8 +3,11 @@
 
 /*
 When stored procedures define parameters, they are declaring one or more variables that will hold information that comes in from outside the stored procedure. Because it's coming from outside, we need validate the information that is being passed in.
+
 Every parameter could potentially have a null value. One of the validations we might need to perform is to make sure that any given parameter is not null.
+
 When there is something wrong with the data that is supplied in the parameters, we can report that through the RAISERROR() function. It's important to note that RAISERROR() is NOT like throwing an exception in C#: An exception in C# will force the method to exit immediately. But RAISERROR() does not.
+
 The implication of this is that since our SQL code in our sproc will continue to run, we need to be purposeful about using the ELSE side of our IF statements.
 */
 
