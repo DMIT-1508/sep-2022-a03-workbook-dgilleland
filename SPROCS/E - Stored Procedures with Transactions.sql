@@ -1,7 +1,13 @@
 --  Stored Procedures (Sprocs)
 -- Demonstrate using Transactions in a Stored Procedure
+--      BEGIN TRANSACTION       -- Should only be stated once
+--      ROLLBACK TRANSACTION    -- Stated as many times as there are potential problems
+--      COMMIT TRANSACTION      -- Should only be stated once, after validating all previous statements were successful
 
 USE [A03-School]
+GO
+-- Call the DB_NAME() function to confirm our current context
+SELECT DB_NAME()
 GO
 
 /*
