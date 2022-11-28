@@ -2,12 +2,14 @@
 USE [A03-School]
 GO
 
-/*
-IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[Table_TriggerType]'))
-    DROP TRIGGER Table_TriggerType
+SELECT DB_NAME()
 GO
 
-CREATE TRIGGER Table_TriggerType
+/*
+DROP TRIGGER IF EXISTS Table_TriggerType
+GO
+
+CREATE OR ALTER TRIGGER Table_TriggerType
 ON TableName
 FOR Insert, Update, Delete -- Choose only the DML statement(s) that apply
 AS
@@ -16,11 +18,10 @@ RETURN
 GO
 */
 -- Making a diagnostic trigger for the first example
-IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[Activity_DML_Diagnostic]'))
-    DROP TRIGGER Activity_DML_Diagnostic
+DROP TRIGGER IF EXISTS Activity_DML_Diagnostic
 GO
 
-CREATE TRIGGER Activity_DML_Diagnostic
+CREATE OR ALTER TRIGGER Activity_DML_Diagnostic
 ON Activity -- Part of the Activity table
 FOR Insert, Update, Delete -- Show diagnostics of the Activity/inserted/deleted tables
 AS
@@ -40,11 +41,10 @@ UPDATE Activity SET ClubId = 'NASA1' WHERE StudentID = 200494476
 DELETE FROM Activity WHERE StudentID = 200494476
 
 -- 1. In order to be fair to all students, a student can only belong to a maximum of 3 clubs. Create a trigger to enforce this rule.
-IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[Activity_InsertUpdate]'))
-    DROP TRIGGER Activity_InsertUpdate
+DROP TRIGGER IF EXISTS Activity_InsertUpdate
 GO
 
-CREATE TRIGGER Activity_InsertUpdate
+CREATE OR ALTER TRIGGER Activity_InsertUpdate
 ON Activity
 FOR Insert, Update -- Choose only the DML statement(s) that apply
 AS
